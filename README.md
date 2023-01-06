@@ -7,8 +7,7 @@
 
 ## Objectifs
 
-1. Représenter des ensembles de Julia
-  1.1 Utiliser différents algorithmes
-  1.2 Se familiariser avec différents languages (R, Julia, Python)
+  Représenter des ensembles de Julia à l'aide de différents algorithmes et languages de programmation (R, Julia, Python) afin de se familiariser avec ces derniers.
+  Mettre en forme et présenter ce travail au moyen d'outils de présentation et plateformes tels que Rmarkdown, Pluto notebooks et github.
 
 ## Contenu
