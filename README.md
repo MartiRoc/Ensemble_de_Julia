@@ -7,8 +7,8 @@ Cette curiosité mathématique, en plus d'être relativement accessible d'un poi
 
 ## Objectifs
 
-1. Représenter des ensembles de Julia à l'aide de différents algorithmes et languages de programmation (R, Julia, Python) afin de se familiariser avec ces derniers.\
-2. Mettre en forme et présenter ce travail au moyen d'outils de présentation et plateformes tels que Rmarkdown, Pluto notebooks et github.\
+1. Représenter des ensembles de Julia à l'aide de différents algorithmes et languages de programmation (R, Julia, Python) afin de se familiariser avec ces derniers.
+2. Mettre en forme et présenter ce travail au moyen d'outils de présentation et plateformes tels que Rmarkdown, Pluto notebooks et github.
 3. Elaborer un package Julia avec mes fonctions les plus complètes et performantes. 
 
 ## Contenu
