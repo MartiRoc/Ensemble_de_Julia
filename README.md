@@ -7,8 +7,9 @@ Cette curiosité mathématique, en plus d'être relativement accessible d'un poi
 
 ## Objectifs
 
-1. Représenter des ensembles de Julia à l'aide de différents algorithmes et langages de programmation (R, Julia, Python) afin de se familiariser avec ces derniers.
-2. Mettre en forme et présenter ce travail au moyen d'outils de présentation et plateformes tels que Rmarkdown, Pluto notebooks et github.
-3. Elaborer un package Julia avec mes fonctions les plus performantes et complètes. 
+1. Définir concrétement les ensembles de Julia.
+2. Représenter ces ensembles à l'aide de différents algorithmes et langages de programmation (R, Julia, Python).
+3. Mettre en forme et présenter ce travail au moyen d'outils de présentation et plateformes tels que Rmarkdown, Pluto notebooks et github.
+4. Elaborer un package Julia avec les fonctions génératrices de fractales les plus performantes et souples. 
 
 ## Contenu
