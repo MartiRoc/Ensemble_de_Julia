@@ -1,0 +1,67 @@
+---
+title: |
+  | \vspace{3 cm} \Huge \textbf{Ensembles de Julia}
+  | \vspace{0.1 cm} \Large théorie et implémentations \vspace{2 cm}
+  ![](test.png)
+output: 
+  pdf_document :
+    extra_dependencies: ["bbm", "amsmath", "pifont", "amsthm", "fancyhdr"]
+    number_sections: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!-- sommaire -->
+
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{gobble}
+\renewcommand\contentsname{Sommaire}
+\vspace{6cm}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+<!-- en tête et pied de page -->
+
+<!-- en tête -->
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt} 
+\fancyhead[L]{Martin Rochas}
+\fancyhead[R]{M1 SSD UGA 2022.2023}
+
+<!-- pied de page  -->
+
+\fancyfoot[R]{\textit{page \thepage}}
+\fancyfoot[C]{}
+\setlength{\parindent}{0pt}
+
+<!-- les théorèmes styles -->
+
+\theoremstyle{plain}
+\newtheorem{thm}{Théorème}[section]
+\newtheorem{lem}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{corr}{Corollaire}[section]
+
+\theoremstyle{definition}
+\newtheorem{ex}{Exemple}[section]
+\newtheorem{deft}{Définition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remarque}
+
+<!-- Début du document -->
+
+\section{Introduction}
+
+Un peu d'histoire, vulgarisation ... etc. A FAIRE. 
+
+\section{Les ensembles de Julia}
+
+
+
+
