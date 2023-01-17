@@ -325,7 +325,7 @@ Par exemple pour (***), I=50 conduit à la génération d'une image noire.
  
 # Chemin vers lequel stocker les images
 
-PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images"
+PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images\\"
 
 ######################### MATRICE DE PIXELS
 
@@ -393,11 +393,11 @@ end
 
 ######################### TESTS 
 
-using BenchmarkTools
+#using BenchmarkTools
 #@benchmark M = Gray.(VecToMat(Julia1(10000,0.6+0.4im)))
 #@benchmark img = Gray.(VecToMat(Julia4R(-0.7+0.388im), r = 6))
 #@benchmark img = Gray.(VecToMat(Julia4Rv2(-0.7+0.388im), r = 6))
-#save(PATH*"\\julia_"*string(Dates.day(now()),"-",Dates.month(now()),"-",Dates.hour(now()),"h",Dates.minute(now()))*".png",img)
+#save(PATH*"julia_"*string(Dates.day(now()),"-",Dates.month(now()),"-",Dates.hour(now()),"h",Dates.minute(now()))*".png",img)
 
 ######################### GENERATION / COLORISATION
 
@@ -484,8 +484,8 @@ end
 ######################### TESTS 
 
 #img = MatToImage(VecToMat(Julia4Rv2(-0.66+0.4im, len = 10000, I = 100), r = 4, fL = 9, fl = 16, yc = 1.5),bg = HSV(0,0,0.1), rainbow = true, h = 60, a=360, s = 1)
-#img = MatToImage(VecToMat(Julia4Rv2(-0.66+0.4im, len = 10000), r = 4),bg = HSV(0,0,0.1))
-#save(PATH*"\\julia_"*string(Dates.day(now()),"-",Dates.month(now()),"-",Dates.hour(now()),"h",Dates.minute(now()))*".png",img)
+#img = MatToImage(VecToMat(Julia4Rv2(-0.66+0.4im, len = 10000), r = 4),bg = HSV(0,0,0.1), rainbow=true)
+#save(PATH*"julia_"*string(Dates.day(now()),"-",Dates.month(now()),"-",Dates.hour(now()),"h",Dates.minute(now()))*".png",img)
 
 ######################### FONCTION FINALE
 
