@@ -1,8 +1,5 @@
-using Pkg
-using Random
-using Dates
 using Images
-Pkg.add("Colors")
+using Dates
 
 ######################### FONCTIONS GENERATRICES DE FRACTALES #########################
 
@@ -542,7 +539,7 @@ function FractaleMR(c ; algo = "ET", dl = false, PATH = "",
     end
 
     if dl == true
-        save(PATH*"julia_"*string(Dates.day(now()),"-",Dates.month(now()),"-",Dates.hour(now()),"h",Dates.minute(now()))*".png",img)
+        save(PATH*"julia_"*string(Dates.day(now()),"-",Dates.month(now()),"-",Dates.hour(now()),"h",Dates.minute(now()))*"_"*"c="*string(real(c))*"+i"*string(imag(c))*".png",img)
     end
 
     return img
