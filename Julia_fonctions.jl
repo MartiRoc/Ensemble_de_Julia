@@ -173,7 +173,7 @@ Paramètre(s):
 divergence".
 =#
 
-function Julia4R(c ; pas = 0.001, I = 50)
+function Julia4R(c ; pas = 0.0004, I = 50)
 
     # Le quadrillage :
     Px = collect(range(-2,2,step=pas))
@@ -230,10 +230,10 @@ La fonction ci-dessous restreint la région du plan evaluée à un rectangle pro
 fractale en appelant Julia1 au préalable. On a un coup en ressource "fixe" plus important 
 mais on est gagnant sur un quadrillage plus fin du plan.
 
-Par défaut Julia4R quadrille [-2,2]x[0,2] en 4000x2000 = 8 000 000 de points, tandis que par 
-défaut Julia4Rv2 quadrille un rectangle strictement inclu dans [-2,2]x[0,2] en 4000x2000 de 
+Par défaut Julia4R quadrille [-2,2]x[0,2] en 10000x5000 = 50 000 000 de points, tandis que par 
+défaut Julia4Rv2 quadrille un rectangle strictement inclu dans [-2,2]x[0,2] en 10000x5000 de 
 points. Julia4Rv2 est donc par défaut "plus fine" que Julia4R. L'intêrét de Julia4Rv2 se 
-révèle lorsque par exemple je divise le pas dans Julia4R par 10 (=0.0001), l'algorithme 
+révèle lorsque par exemple je divise le pas dans Julia4R par 10 (=0.00004), l'algorithme 
 n'aboutit pas à cause d'un problème de mémoire (du à ma configuration) alors qu'augmenter la 
 finesse du quadrillage d'un facteur 5 dans Julia4Rv2 suffit à obtenir le même niveau de détail 
 que si Julia4R avait abouti (car la plupart des fractales ne s'étendent que sur la moitié en 
@@ -325,7 +325,7 @@ Par exemple pour (***), I=50 conduit à la génération d'une image noire.
  
 # Chemin vers lequel stocker les images
 
-PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images\\"
+#PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images\\"
 
 ######################### MATRICE DE PIXELS
 
@@ -363,7 +363,7 @@ function VecToMat(V ; xa=(-2,2), ya=(-2,2), xc=1, yc=1, fl=10, fL=10, r=2)
     Y = V[2]*yc
 
     #= On discrimine les points de X et Y qui sortent de xa*ya pour éviter des soucis
-    d'indices plus bas. =#
+    d'indices plus bas lors de la conversion des points (x,y) en pixels de la matrice. =#
     b = size(V[1])[1]
     for i in 1:b
         x = X[i]
@@ -373,16 +373,19 @@ function VecToMat(V ; xa=(-2,2), ya=(-2,2), xc=1, yc=1, fl=10, fL=10, r=2)
         end
     end
 
-    # Définition de la matrice de pixels qui représente xa*ya.
-    l = Int(round(100*fl*r))
-    L = Int(round(100*fL*r))  
+    # Définition de la matrice de pixels qui représente xa*ya :
+    rapport_xa_ya = (xa[2]-xa[1])/(ya[2]-ya[1]) #= Pour que la matrice représente bien 
+    le rectangle xa*ya sans déformation. =# 
+    l = Int(round(100*fl*r*rapport_xa_ya)) # Largeur / nombre de pixels verticaux.
+    L = Int(round(100*fL*r)) # Longueur / ... horizontaux.
     M = zeros(L,l)*1.0
 
-    #= Parcours des vecteurs X et Y, les pixels de M correspondant aux points (X,Y) sont changés
-    en 1. =#
+    #= Parcours simultané des vecteurs X et Y. On convertit les points (x,y) en coordonnées 
+    entières à l'échelle de la matrice. Comme on fait des arrondis, pour éviter les pixels (0,.)
+    ou (.,0) qui n'existent pas dans la matrice (indices qui commencent à 1) on utilise max. =#
     for i in 1:b
         if X[i]!=42
-            a = Int(round((Y[i]-ya[1])*L/(ya[2]-ya[1]))) 
+            a = L - Int(round((Y[i]-ya[1])*L/(ya[2]-ya[1]))) 
             b = Int(round((X[i]-xa[1])*l/(xa[2]-xa[1])))
             M[max(1,a),max(1,b)] = 1. 
         end
@@ -549,8 +552,8 @@ end
 
 # paramètres de Julia3
 
-#FractaleMR(0.99+1im, I = 7)
-#FractaleMR(0.99+1im, B = 10, N = 1000, algo = "IV")
+#FractaleMR(0.99+1im, algo = "IV")
+#FractaleMR(0.99+1im, B = 10, N = 648, algo = "IV")
 
 # paramètres de Julia4Rv2
 
@@ -564,7 +567,7 @@ end
 # paramètres de VecToMat
 
 #FractaleMR(0.19+0.6im, I = 100)
-#FractaleMR(0.19+0.6im, I = 100, yc = 1.5)
+#FractaleMR(0.19+0.6im, I = 100, yc = 2)
 #FractaleMR(0.19+0.6im, I = 100, xc = 0.1)
 #FractaleMR(0.19+0.6im, I = 100, xa = (-1,1), ya=(-1,1))
 #FractaleMR(0.19+0.6im, I = 100, fl = 16, fL=9)
@@ -573,34 +576,7 @@ end
 # paramètres de MatToImage
 #FractaleMR(0.19+0.6im, I = 100, bg=HSV(190,1,0.3), fg=HSV(60,1,1), tips = false)
 #FractaleMR(0.19+0.6im, I = 100, xc = 1.5, yc=1.5, rainbow=true, tips=false)
-#FractaleMR(0.19+0.6im, I = 100, xc = 1.5, yc=1.5, rainbow=true, h=120, a=120, tips=false)
+#FractaleMR(0.19+0.6im, I = 100, xa = (-1,1), rainbow=true, h=120, a=120, tips=false)
 
 # sauvegarde
 #FractaleMR(0.19+0.6im, I = 100, dl=true, PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images\\")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
