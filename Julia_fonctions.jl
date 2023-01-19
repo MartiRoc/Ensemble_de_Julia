@@ -1,5 +1,5 @@
-import Pkg; Pkg.add("Colors")
-using Colors
+using Pkg
+Pkg.add("Images")
 using Images
 using Dates
 
