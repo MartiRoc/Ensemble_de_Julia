@@ -1,3 +1,5 @@
+import Pkg; Pkg.add("Colors")
+using Colors
 using Images
 using Dates
 
@@ -502,9 +504,9 @@ le répertoire de travail ou dans C:\Users\*vous* sur windows si aucun répertoi
 - tips : booléen -> voulez-vous des conseils sur l'algorithme "ET" ?
 =#
 
-function FractaleMR(c ; algo = "ET", dl = false, PATH = "",
+function JFractalMR(c ; algo = "ET", dl = false, PATH = "",
     N = 648, B = 5, #Julia3
-    len = 10000, I = 25, #Julia4Rv2
+    len = 4000, I = 25, #Julia4Rv2
     xa=(-2,2), ya=(-2,2), xc=1, yc=1, fl=10, fL=10, r=2, #VecToMat
     bg = HSV(0,0,0), fg = HSV(0,0,1), rainbow = false, h=0, s=1, v=1, a=360, #MatToImage
     tips = true) 
@@ -512,18 +514,18 @@ function FractaleMR(c ; algo = "ET", dl = false, PATH = "",
     if tips
         print("\n", 
         
-        "CONSEILS POUR L'ALGORITHME ESCAPE TIME:", "\n", "\n",
+        "CONSEILS POUR L'ALGORITHME ESCAPE TIME (utilisé par défaut):", "\n", "\n",
 
-        "- Si vous choisissez algo = 'ET' et que la fractale n'apparait", "\n",
-        "  pas, tenter de baisser I < 50 (ou augmenter len > 10000).", "\n","\n",
+        "- Si la fractale n'apparait pas, tenter de baisser I < 50", "\n",
+        "  (augmenter len > 8000 peut aider).", "\n","\n",
 
-        "- Si vous voyez des zones plaines, essayez d'augmenter I > 50 (ou len).", "\n", "\n",
+        "- Si vous voyez des zones plaines, essayez d'augmenter I > 50.", "\n", "\n",
 
         "- Si des lignes de la couleur du fond aparaissent dans les zones", "\n",
         "  plaines, c'est que, pour une même surface, la finesse du", "\n",
         "  quadrillage pour le calcul des points -paramètre len- est", "\n",
-        "  inférieure à la définition de l'image -paramètre r-, augmentez le", "\n",
-        "  premier ou baisser le second.", "\n", "\n",
+        "  inférieure à la définition de l'image -paramètre r-, augmentez", "\n",
+        "  le premier ou baisser le second.", "\n", "\n",
         
         "- Utiliser -rainbow = true- !", "\n", "\n")
     end
@@ -549,31 +551,31 @@ end
 
 # paramètres de Julia3
 
-#FractaleMR(0.99+1im, algo = "IV")
-#FractaleMR(0.99+1im, B = 10, N = 648, algo = "IV")
+#JFractalMR(0.99+1im, algo = "IV")
+#JFractalMR(0.99+1im, B = 10, N = 648, algo = "IV")
 
 # paramètres de Julia4Rv2
 
-#FractaleMR(0.19+0.6im)
-#FractaleMR(0.19+0.6im, I = 100)
-#FractaleMR(0.19+0.6im, I = 25)
-#FractaleMR(0.19+0.6im, len = 10, I = 100)
-#FractaleMR(0.19+0.6im, len = 5000, I = 100)
-#FractaleMR(0.19+0.6im, len = 2000, I = 100)
+#JFractalMR(0.19+0.6im)
+#JFractalMR(0.19+0.6im, I = 100)
+#JFractalMR(0.19+0.6im, I = 25)
+#JFractalMR(0.19+0.6im, len = 10, I = 100)
+#JFractalMR(0.19+0.6im, len = 5000, I = 100)
+#JFractalMR(0.19+0.6im, len = 2000, I = 100)
 
 # paramètres de VecToMat
 
-#FractaleMR(0.19+0.6im, I = 100)
-#FractaleMR(0.19+0.6im, I = 100, yc = 2)
-#FractaleMR(0.19+0.6im, I = 100, xc = 0.1)
-#FractaleMR(0.19+0.6im, I = 100, xa = (-1,1), ya=(-1,1))
-#FractaleMR(0.19+0.6im, I = 100, fl = 16, fL=9)
-#FractaleMR(0.19+0.6im, I = 100, r = 0.1)
+#JFractalMR(0.19+0.6im, I = 100)
+#JFractalMR(0.19+0.6im, I = 100, yc = 2)
+#JFractalMR(0.19+0.6im, I = 100, xc = 0.1)
+#JFractalMR(0.19+0.6im, I = 100, xa = (-1,1), ya=(-1,1))
+#JFractalMR(0.19+0.6im, I = 100, fl = 16, fL=9)
+#JFractalMR(0.19+0.6im, I = 100, r = 0.1)
 
 # paramètres de MatToImage
-#FractaleMR(0.19+0.6im, I = 100, bg=HSV(190,1,0.3), fg=HSV(60,1,1), tips = false)
-#FractaleMR(0.19+0.6im, I = 100, xc = 1.5, yc=1.5, rainbow=true, tips=false)
-#FractaleMR(0.19+0.6im, I = 100, xa = (-1,1), rainbow=true, h=120, a=120, tips=false)
+#JFractalMR(0.19+0.6im, I = 100, bg=HSV(190,1,0.3), fg=HSV(60,1,1), tips = false)
+#JFractalMR(0.19+0.6im, I = 100, xc = 1.5, yc=1.5, rainbow=true, tips=false)
+#JFractalMR(0.19+0.6im, I = 100, xa = (-1,1), rainbow=true, h=120, a=120, tips=false)
 
 # sauvegarde
-#FractaleMR(0.19+0.6im, I = 100, dl=true, PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images\\")
+#JFractalMR(0.19+0.6im, I = 100, dl=true, PATH = "C:\\Cours\\UGA22-23\\LR_projet S1\\Images\\")
