@@ -1,8 +1,8 @@
 ---
 title: |
-  | \vspace{3 cm} \Huge \textbf{Ensembles de Julia}
+  | \vspace{1 cm} \Huge \textbf{Ensembles de Julia}
   | \vspace{0.1 cm} \Large théorie et implémentations \vspace{2 cm}
-  ![](test.png)
+  ![](Galerie\julia_20-1-19h41_c=-0.7+i0.3.png)
 output: 
   pdf_document :
     extra_dependencies: ["bbm", "amsmath", "pifont", "amsthm", "fancyhdr"]
@@ -16,10 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 <!-- sommaire -->
 
 \pagenumbering{gobble}
-\newpage
 \pagenumbering{gobble}
 \renewcommand\contentsname{Sommaire}
-\vspace{6cm}
 \tableofcontents
 \newpage
 \pagenumbering{arabic}
@@ -58,9 +56,52 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \section{Introduction}
 
-Un peu d'histoire, vulgarisation ... etc. A FAIRE. 
+  Les ensembles de Julia sont des ensembles de points dans le plan complexe qui sont définis par une fonction complexe $f$ et un paramètre complexe $c$ constant. Nous verrons dans ce document plus en détail de quelles façons.
+  
+  Le nom de ces ensembles provient de leur découvreur, le mathématicien français Gaston Julia qui les a étudiés dans les années 1910 et 1920.
+  
+  Il existe des ensembles de Julia différents pour tout choix approprié de $f$ et $c$, mais certains d'entre eux donnent des images plus intéressantes que d'autres. Les ensembles de Julia les plus célèbres, ceux auxquels on va s'intéresser, sont ceux obtenus pour,
+  
+  $$f : z \longrightarrow z^{2} + c.$$
 
-\section{Les ensembles de Julia}
+  Les ensembles de Julia sont notamment utilisés en géométrie fractale, en théorie des systèmes dynamiques complexes et en théorie des chaînes de Markov. Moins glorieusement, nous nous en servons dans ce travail comme d'une excuse pour apprendre à utiliser $R$, _Rmarkdown_, _GitHub_, le langage de programmation _julia_, les _Pluto notebook_ et enfin, juste pour le plaisir de générer de belles images.  
+  
+  
+\section{Théorie}
+
+Dans toute la suite $c\in \mathbb{C}$ et $f : z \longrightarrow z^{2} + c$. De plus, on note pour tout entier strictement positif $n$,
+
+$$f^{(n)} = \underbrace{f \circ f \circ ... \circ f}_{n\text{ fois}}.$$
+
+\subsection{Définitions}
+
+\begin{deft}[Ensemble de Julia REMPLI]
+
+On note $\mathcal{J}^{r}_{c}$ l'ensemble de Julia rempli associé à $c$. Il correspond à l'ensemble des $z \in \mathbb{C}$ tels que la suite,
+
+$$(f^{(n)}(z))_{n\geq1}$$
+est bornée. Autrement dit, 
+
+$$\mathcal{J}^{r}_{c} = \{ z\in \mathbb{C}~~|~~\exists M\in\mathbb{R}^{+} ~~\text{tq}~~\forall n \geq 1,~~ |f^{(n)}(z)| \leq M \}$$
+
+\end{deft}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
