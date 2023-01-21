@@ -2,6 +2,7 @@
 title: |
   | \vspace{1 cm} \Huge \textbf{Ensembles de Julia}
   | \vspace{0.1 cm} \Large théorie et implémentations \vspace{2 cm}
+  | \pagenumbering{gobble}
   ![](Galerie\julia_20-1-19h41_c=-0.7+i0.3.png)
 output: 
   pdf_document :
@@ -15,7 +16,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- sommaire -->
 
-\pagenumbering{gobble}
 \pagenumbering{gobble}
 \renewcommand\contentsname{Sommaire}
 \tableofcontents
