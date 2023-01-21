@@ -31,11 +31,11 @@ md"# Fonction JFractalMR du package Fractal.jl"
 
 # ╔═╡ 914d7c5a-7db1-42a9-a561-9bfc2de40b8a
 md"
-Le but de ce notebook est de présenter de manière interactive la fonction principale du package **Fractal.jl** qui permet de représenter des ensembles de Julia. Pour plus d'informations sur le package cliquer [ici](https://github.com/MartiRoc/Fractal.jl).
+Le but de ce notebook est de présenter de manière interactive la fonction principale du package **Fractal.jl** qui permet de représenter des approximations d'ensembles de Julia (rempli ou non). Pour plus d'informations sur le package cliquer [ici](https://github.com/MartiRoc/Fractal.jl).
 
 Si vous ne disposez pas d'un environnement Julia pour éxécuter et rendre interactif ce notebook, cliquer sur - **Edit** or **Run** this notebook- en haut à droite de la page puis cliquer sur binder. Le notebook va être éxécuté sur le web (cela peut prendre quelques minutes).
 
-Tout au long du document vous pouvez observer l'influence des paramètres sur l'image à l'aide du bouton _show_.
+Tout au long du document vous pouvez observer l'influence des paramètres sur l'image générée à l'aide du bouton _show_.
 "
 
 # ╔═╡ b4325dc1-9fc0-4056-91ad-b49947ca9dc1
@@ -67,9 +67,9 @@ md"### L'agoritme utilisé
 
 Deux algorithmes sont disponibles pour approximer la fractale de paramètre **c**, le choix se fait par le paramètre **algo**. 
 
-Par défaut l'algorithme 'Escape Time' ou 'Temps de fuite' est utilisé, il consiste à quadriller la région du plan contenant la fractale puis à tester si chacun des éléments du quadrillage appartient ou non à la fractale. La finesse du quadrillage est définie par le paramètre **len** et la dureté du test que vont subir chacun des points du quadrillage par **I**.
+Par défaut l'algorithme 'Escape Time' ou 'Temps de fuite' est utilisé, il approxime l'ensemble de Julia rempli et consiste à quadriller la région du plan contenant la fractale puis à tester si chacun des éléments du quadrillage appartient ou non à la fractale. La finesse du quadrillage est définie par le paramètre **len** et la dureté du test que vont subir chacun des points du quadrillage par **I**.
 
-Le second algorithme dit d'Itérations Inverses' est basé sur un résultat mathématique et permet de calculer **BxNxN** points appartenant à la fractale avec **B** et **N** deux entiers pouvant être modifiés. 
+Le second algorithme dit d'Itérations Inverses' approxime l'ensemble de Julia (non-rempli). Il est basé sur un résultat mathématique et permet de calculer **BxNxN** points appartenant à la fractale avec **B** et **N** deux entiers pouvant être modifiés. 
 
 Choisir l'algorithme :
 "
@@ -202,7 +202,7 @@ Intégrer l'option **rainbow = true** à l'appel de la fonction permet de colore
 range(HSV(0,1,1), stop=HSV(360,1,1), length=1000)
 
 # ╔═╡ 3f0a75af-5823-41d7-bdd6-98533ace75ff
-md"Les paramètres **h**, **s**, **v** et **a** permettent de controler l'irrisation, **h**, **s** et **v** définissent respectivement la couleur de départ, la saturation et la valeur de l'irrisation (triplet _HSV_). Quant à **a**, il régit le déplacement angulaire des couleurs à partir de la couleur de départ (c.f. le cercle _HSV_ plus haut)."
+md"Les paramètres **h**, **s**, **v** et **a** permettent de controler l'irrisation, **h**, **s** et **v** définissent respectivement la couleur de départ (la plus à gauche), la saturation et la valeur de l'irrisation. Quant à **a**, il régit le déplacement angulaire des couleurs à partir de la couleur de départ (c.f. le cercle _HSV_ plus haut pour vous repérer)."
 
 # ╔═╡ 7085c315-bda1-48b3-be4e-5b7322aba3d0
 md"
@@ -242,7 +242,7 @@ md"### Generation de l'image"
 # On doit discriminer l'appel de la fonction car suivant l'algorithme choisi, les paramètres de l'autre ne sont pas déclarés.
 
 if algo == "INV"
-	img = JFractalMR(c, algo=algo, N=N, B=B, xa=(xa1,xa2), ya=(ya1,ya2), xc=xc, yc=yc, fl=fl, fL=fL, r=r, bg=bg, fg=fg, rainbow=rainbow, h=h, s=s, v=v, a=a, tips=tips)
+	img = JFractalMR(c, algo="IV", N=N, B=B, xa=(xa1,xa2), ya=(ya1,ya2), xc=xc, yc=yc, fl=fl, fL=fL, r=r, bg=bg, fg=fg, rainbow=rainbow, h=h, s=s, v=v, a=a, tips=tips)
 else
 	img = JFractalMR(c, algo=algo, len=len, I=I, xa=(xa1,xa2), ya=(ya1,ya2), xc=xc, yc=yc, fl=fl, fL=fL, r=r, bg=bg, fg=fg, rainbow=rainbow, h=h, s=s, v=v, a=a,tips=tips)
 end

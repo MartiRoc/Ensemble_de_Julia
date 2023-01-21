@@ -75,21 +75,39 @@ $$f^{(n)} = \underbrace{f \circ f \circ ... \circ f}_{n\text{ fois}}.$$
 
 \subsection{Définitions}
 
-\begin{deft}[Ensemble de Julia REMPLI]
+\begin{deft}[Ensemble de Julia rempli]
 
-On note $\mathcal{J}^{r}_{c}$ l'ensemble de Julia rempli associé à $c$. Il correspond à l'ensemble des $z \in \mathbb{C}$ tels que la suite,
-
+On note $\mathcal{J}^{r}_{c}$ l'ensemble de Julia rempli associé à $c$. Il correspond à l'ensemble des nombres complexes $z \in \mathbb{C}$ tels que la suite,
 $$(f^{(n)}(z))_{n\geq1}$$
-est bornée. Autrement dit, 
 
-$$\mathcal{J}^{r}_{c} = \{ z\in \mathbb{C}~~|~~\exists M\in\mathbb{R}^{+} ~~\text{tq}~~\forall n \geq 1,~~ |f^{(n)}(z)| \leq M \}$$
+est bornée. Autrement dit, 
+$$\mathcal{J}^{r}_{c} = \{ z\in \mathbb{C}~~|~~\exists M\in\mathbb{R}^{+} ~~\text{tq}~~\forall n \geq 1,~~ |f^{(n)}(z)| \leq M \}.$$
 
 \end{deft}
 
+\begin{deft}[Ensemble de Julia]
+On note $\mathcal{J}_{c}$ l'ensemble de Julia associé à $c$ qui n'est autre que la frontière de $\mathcal{J}^{r}_{c}$ défini précédemment: 
+$$\mathcal{J}_{c} = \partial\mathcal{J}^{r}_{c}.$$
 
+Autrement dit, $\mathcal{J}_{c}$ est l'ensemble des nombres complexes qui sont à la fois limite d'éléments de $\mathcal{J}^{r}_{c}$ et limite d'éléments de $\mathbb{C}\backslash \mathcal{J}^{r}_{c}$.
+\end{deft}
 
+\begin{rem}
+Ces définitions sont en fait des caractérisations. De manière plus générale, tout ensemble de Julia associé à une fonction complexe $g$ polynomiale peut être caractérisé de cette manière. 
 
+La véritable définition consiste à décrire, pour toute fonction $g$ holomorphe non-constante de $\mathbb{C}\cup\{\infty\} \longrightarrow \mathbb{C}\cup\{\infty\}$, l'ensemble de Julia associé à $g$ comme le plus petit ensemble fermé $\mathcal{J}$ vérifiant, 
 
+\begin{itemize}
+  \item $\#\mathcal{J} \geq 3$
+  \item $g(\mathcal{J}) = \mathcal{J}.$
+\end{itemize}
+\end{rem}
+
+\subsection{Caractérisation utile}
+
+Nous allons voir dans cette partie une caractérisation intéressante de l'ensemble de Julia associé à 
+
+\begin{thm}[]
 
 
 
