@@ -69,33 +69,31 @@ knitr::opts_chunk$set(echo = TRUE)
   
 \section{Théorie}
 
-Dans toute la suite $c\in \mathbb{C}$ et $f : z \longrightarrow z^{2} + c$. De plus, on note pour tout entier strictement positif $n$,
+Dans toute la suite $c\in \mathbb{C}$ avec $|c|\leq2$ et $f : z \longrightarrow z^{2} + c$. De plus, on note pour tout entier strictement positif $n$,
 
 $$f^{(n)} = \underbrace{f \circ f \circ ... \circ f}_{n\text{ fois}}.$$
 
 \subsection{Définitions}
 
 \begin{deft}[Ensemble de Julia rempli]
-
-On note $\mathcal{J}^{r}_{c}$ l'ensemble de Julia rempli associé à $c$. Il correspond à l'ensemble des nombres complexes $z \in \mathbb{C}$ tels que la suite,
+On note $\mathcal{J}^{r}_{f}$ l'ensemble de Julia rempli associé à $f$. Il correspond à l'ensemble des nombres complexes $z \in \mathbb{C}$ tels que la suite,
 $$(f^{(n)}(z))_{n\geq1}$$
 
 est bornée. Autrement dit, 
-$$\mathcal{J}^{r}_{c} = \{ z\in \mathbb{C}~~|~~\exists M\in\mathbb{R}^{+} ~~\text{tq}~~\forall n \geq 1,~~ |f^{(n)}(z)| \leq M \}.$$
-
+$$\mathcal{J}^{r}_{f} = \{ z\in \mathbb{C}~~|~~\exists M\in\mathbb{R}^{+} ~~\text{tq}~~\forall n \geq 1,~~ |f^{(n)}(z)| \leq M \}.$$
 \end{deft}
 
 \begin{deft}[Ensemble de Julia]
-On note $\mathcal{J}_{c}$ l'ensemble de Julia associé à $c$ qui n'est autre que la frontière de $\mathcal{J}^{r}_{c}$ défini précédemment: 
-$$\mathcal{J}_{c} = \partial\mathcal{J}^{r}_{c}.$$
+On note $\mathcal{J}_{f}$ l'ensemble de Julia associé à $f$ qui n'est autre que la frontière de $\mathcal{J}^{r}_{f}$ défini précédemment: 
+$$\mathcal{J}_{f} = \partial\mathcal{J}^{r}_{f}.$$
 
-Autrement dit, $\mathcal{J}_{c}$ est l'ensemble des nombres complexes qui sont à la fois limite d'éléments de $\mathcal{J}^{r}_{c}$ et limite d'éléments de $\mathbb{C}\backslash \mathcal{J}^{r}_{c}$.
+Autrement dit, $\mathcal{J}_{f}$ est l'ensemble des nombres complexes qui sont à la fois limite d'éléments de $\mathcal{J}^{r}_{f}$ et limite d'éléments de $\mathbb{C}\backslash \mathcal{J}^{r}_{f}$.
 \end{deft}
 
 \begin{rem}
 Ces définitions sont en fait des caractérisations. De manière plus générale, tout ensemble de Julia associé à une fonction complexe $g$ polynomiale peut être caractérisé de cette manière. 
 
-La véritable définition consiste à décrire, pour toute fonction $g$ holomorphe non-constante de $\mathbb{C}\cup\{\infty\} \longrightarrow \mathbb{C}\cup\{\infty\}$, l'ensemble de Julia associé à $g$ comme le plus petit ensemble fermé $\mathcal{J}$ vérifiant, 
+La véritable définition consiste à décrire, pour toute fonction $g$ holomorphe non-constante de $\mathbb{C}\cup\{\infty\} \longrightarrow \mathbb{C}\cup\{\infty\}$ (les fractions rationnelles non-constantes), l'ensemble de Julia associé à $g$ comme le plus petit ensemble fermé $\mathcal{J}$ vérifiant, 
 
 \begin{itemize}
   \item $\#\mathcal{J} \geq 3$
@@ -103,16 +101,49 @@ La véritable définition consiste à décrire, pour toute fonction $g$ holomorp
 \end{itemize}
 \end{rem}
 
-\subsection{Caractérisation utile}
+\subsection{Caractérisations utiles et algorithmes}
 
-Nous allons voir dans cette partie une caractérisation intéressante de l'ensemble de Julia associé à 
+Nous allons voir dans cette partie deux caractérisations intéressantes de l'ensemble de Julia (rempli et non-rempli) associé à $f$ qui nous permettront d'implémenter deux algorithmes pour représenter les fractales recherchées.
 
-\begin{thm}[]
+\subsubsection{Ensemble de Julia rempli : une borne uniforme}
 
+La première caractérisation dont on va parler est basée sur ce lemme.
 
+\begin{lem} 
+$\mathcal{J}^{r}_{f} = \{ z\in \mathbb{C}~~tq~~(|f^{(n)}(z)|)_{n\geq1} ~\leq 2 \}.$
+\end{lem}
 
+\begin{proof}
+Montrons que, 
+$$\mathcal{J}^{r}_{f} \subseteq \{ z\in \mathbb{C}~~tq~~(|f^{(n)}(z)|)_{n\geq1} ~\leq 2 \}=:A.$$
 
+La réciproque étant évidente, nous aurons l'égalité. Par contraposition, soit $z_{0} \notin A$, il existe un rang $N$ et $\epsilon>0$ tels que,
+$$|f^{(N)}(z_{0})| \geq 2+\epsilon,$$
+Notons $u_{N} = |f^{(N)}(z_{0})|$, par inégalité triangulaire inverse,
+\begin{align*}
+  u_{N+1} &= |f^{(N)}(z_{0})^{2}+c|\\
+          &\geq |u_{N}^{2}-|c||
+\end{align*}
 
+Or, $u_{N}^{2} >2$ et $|c|\leq2$, d’où, 
+$$u_{N+1} \geq u_{N}^{2}-|c| \geq 4 + 4\epsilon + \epsilon^{2} - 2 \geq 2+2\epsilon$$
+          
+Un récurrence immédiate nous donne ainsi que pour tout entier $k$,
+$$u_{N+k} \geq 2+(1+k)\epsilon,$$
+
+impliquant,
+$$\lim\limits_{k \rightarrow +\infty} u_{N+k} = +\infty.$$
+
+Autrement dit, $(|f^{(n)}(z_{0})|)_{n\geq1}$ diverge vers $+\infty$, $(f^{(n)}(z_{0}))_{n\geq1}$ n'est pas bornée et $z_{0}$ n'appartient pas à $\mathcal{J}^{r}_{f}$. Ce qui conclut la preuve. 
+\end{proof}
+
+\subsubsection{Algorithme du temps de fuite}
+
+Du lemme précédent découle un algorithme simple qui consiste à quadriller $[-2,2]\times[-2,2]$ et à itérer $f$ un certain nombre de fois, notons ce nombre $I$, à chaque élément du quadrillage. Les points qui après $I$ itérations restent dans le cercle de rayon $2$ seront considérés comme appartenant à l'ensemble de Julia rempli associé à $f$. Les autres non.
+
+C'est une approximation, déjà parce qu'on ne teste pas tous les points de $[-2,2]\times[-2,2]$, mais aussi parce qu'en théorie il faudrait vérifier que toute les itérations de $f$ à un élément du quadrillage reste dans le cercle de rayon $2$ pour s'assurer que ce point appartient à l'ensemble de Julia rempli. Mais c'est impossible, on se restreint à $I$ itérations. Ce nombre est ainsi directement lié à la précision de l'approximation obtenue.
+
+De plus, notons que les ensembles de Julia associés à $f$ sont symétrique par rapport à l'origine. Nous pouvons ainsi nous restreindre à ne "tester" que les éléments du quadrillage appartenant au pan supérieur du plan et obtenir le reste par symétrie.
 
 
 
